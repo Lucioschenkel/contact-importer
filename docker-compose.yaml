@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  database:
+    image: postgres
+    container_name: contact_db
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=contact_importer
+    volumes:
+      - pgdata:/data/postgres
+  app:
+    build: .
+    container_name: contact_server
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+    environment:
+      - PORT=3000
+
+volumes:
+  pgdata:
+    driver: local

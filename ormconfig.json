@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "port": 5433,
+  "host": "localhost",
+  "username": "docker",
+  "password": "docker",
+  "database": "contact_importer",
+  "migrations": [
+    "./src/infra/typeorm/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/modules/**/entities/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/infra/typeorm/migrations"
+  }
+}
