@@ -11,7 +11,8 @@
       "@shared/*": ["shared/*"],
       "@errors/*": ["shared/errors/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@providers/*": ["shared/providers/*"]
     },
     "resolveJsonModule": true,
     "outDir": "./dist",

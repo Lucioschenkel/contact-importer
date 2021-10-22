@@ -10,7 +10,10 @@
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
+    "@types/joi": "^17.2.3",
     "bcrypt": "^5.0.1",
+    "celebrate": "^15.0.0",
+    "class-transformer": "^0.4.0",
     "csv-parse": "^4.16.3",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
@@ -21,6 +24,7 @@
     "swagger-ui-express": "^4.1.6",
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.38",
+    "typeorm-pagination": "^2.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
