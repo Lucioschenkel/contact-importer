@@ -1,3 +1,4 @@
+import { Exclude, Expose } from "class-transformer";
 import { Column, Entity, OneToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
@@ -22,8 +23,10 @@ export class Contact implements IContact {
   address: string;
 
   @Column()
+  @Exclude()
   credit_card: string;
 
+  @Expose({ name: "credit_card" })
   @Column()
   credit_card_last_four_digits: string;
 

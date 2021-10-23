@@ -3,7 +3,6 @@ import { FakeContactsRepository } from "@modules/contacts/infra/repositories/fak
 import { AppError } from "@shared/errors/AppError";
 import { IHashProvider } from "@shared/providers/domain/hash/IHashProvider";
 import { FakeHashProvider } from "@shared/providers/infra/hash/FakeHashProvider";
-import { Joi } from "celebrate";
 
 import { CreateContactUseCase } from "./CreateContactUseCase";
 
@@ -21,33 +20,69 @@ describe("CreateContactUseCase", () => {
     );
   });
 
-  // it("should be able to create a contact if valid data is provided", async () => {});
+  it("should be able to create a contact if valid data is provided", async () => {
+    const contact = await createContactUseCase.execute({
+      address: "A valid address",
+      credit_card: "4444444444444444",
+      date_of_birth: "2020-10-02",
+      email: "contato@lucioschenkel.com",
+      name: "Valid name",
+      telephone: "(+00) 000-000-00-00",
+      owner_id: "c9b5d808-0529-437e-94a9-ad0bbdac64e7",
+    });
 
-  it("should not create a contact if the provided name has special characters other than '-'", async () => {
-    expect(async () => {
-      await createContactUseCase.execute({
-        address: "Valid address",
-        credit_card: "444444444444",
-        date_of_birth: "2021-08-10",
-        email: "contato@lucioschenkel.com",
-        owner_id: "some_id",
-        telephone: "(+57) 320-432-05-09",
-        name: "$someName1223",
-      });
-    }).rejects.toBeTruthy();
+    expect(contact).toHaveProperty("id");
   });
 
-  // it("should not create a contact if the provided date of birth is not valid", async () => {});
+  it("should be able to get the franchise from the credit card number", async () => {
+    const contact = await createContactUseCase.execute({
+      address: "A valid address",
+      credit_card: "4444444444444444",
+      date_of_birth: "2020-10-02",
+      email: "contato@lucioschenkel.com",
+      name: "Valid name",
+      telephone: "(+00) 000-000-00-00",
+      owner_id: "c9b5d808-0529-437e-94a9-ad0bbdac64e7",
+    });
 
-  // it("should not create a contact if the provided telephone is not valid", async () => {});
+    expect(contact.franchise).toBe("visa");
+  });
 
-  // it("should not create a contact if the provided address is empty", async () => {});
+  it("should not create a contact if one of the fields is invalid", async () => {
+    expect(async () => {
+      await createContactUseCase.execute({
+        address: "A valid address",
+        credit_card: "444455556666777", // Invalid credit card length
+        date_of_birth: "2020-10-02",
+        email: "contato@lucioschenkel.com",
+        name: "Valid name",
+        telephone: "(+00) 000-000-00-00",
+        owner_id: "c9b5d808-0529-437e-94a9-ad0bbdac64e7",
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
 
-  // it("should not create a contact if the provided credit card's length is invalid", async () => {});
+  it("should not create a contact if the user already has a contact with that email", async () => {
+    expect(async () => {
+      await createContactUseCase.execute({
+        address: "A valid address",
+        credit_card: "4444444444444444",
+        date_of_birth: "2020-10-02",
+        email: "contato@lucioschenkel.com",
+        name: "Valid name",
+        telephone: "(+00) 000-000-00-00",
+        owner_id: "c9b5d808-0529-437e-94a9-ad0bbdac64e7",
+      });
 
-  // it("should be able to identify the franchise from the credit card number", () => {});
-
-  // it("should not create a contact if the provided email is invalid", () => {});
-
-  // it("should not create a contact if the provided email is already in the contacts list of the user", async () => {});
+      await createContactUseCase.execute({
+        address: "A valid address",
+        credit_card: "4444444444444444",
+        date_of_birth: "2020-10-02",
+        email: "contato@lucioschenkel.com",
+        name: "Valid name",
+        telephone: "(+00) 000-000-00-00",
+        owner_id: "c9b5d808-0529-437e-94a9-ad0bbdac64e7",
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });

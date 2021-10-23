@@ -1,8 +1,11 @@
-import { Joi } from "celebrate";
+import creditCardType from "credit-card-type";
+import { inject, injectable } from "tsyringe";
 
+import patterns from "@config/patterns";
 import { IContactsRepository } from "@modules/contacts/domain/repositories/IContactsRepository";
-import { IHashProvider } from "@shared/providers/domain/hash/IHashProvider";
 import { AppError } from "@shared/errors/AppError";
+import { IHashProvider } from "@shared/providers/domain/hash/IHashProvider";
+import contactValidator from "@utils/validators/contact";
 
 interface IRequest {
   address: string;
@@ -14,9 +17,12 @@ interface IRequest {
   telephone: string;
 }
 
+@injectable()
 export class CreateContactUseCase {
   constructor(
+    @inject("ContactsRepository")
     private contactsRepository: IContactsRepository,
+    @inject("HashProvider")
     private hashProvider: IHashProvider
   ) {}
 
@@ -28,30 +34,57 @@ export class CreateContactUseCase {
     name,
     owner_id,
     telephone,
-  }: IRequest): Promise<void> {
-    const contactSchema = Joi.object({
-      address: Joi.string().required().min(1),
-      name: Joi.string()
-        .required()
-        .pattern(/^[A-Za-z0-9_-]*$/),
-      email: Joi.string().required().email(),
-      owner_id: Joi.string().required(),
-      telephone: Joi.string()
-        .required()
-        .pattern(/\(\+\d\d\) [\d\d\d( |\-)]{16}/g),
-    });
-
-    const { value, error } = contactSchema.validate({
+  }: IRequest) {
+    const isContactValid = contactValidator({
       address,
+      credit_card,
+      date_of_birth,
       email,
       name,
       owner_id,
       telephone,
     });
 
-    if (error) {
-      // TODO log in the database the reason for the failure
-      throw error;
+    if (!isContactValid) {
+      throw new AppError("The provided contact is not valid");
     }
+
+    const contactExists = await this.contactsRepository.findByEmail(
+      email,
+      owner_id
+    );
+
+    if (contactExists) {
+      throw new AppError("A contact with that e-mail already exists");
+    }
+
+    const credit_card_last_four_digits = credit_card.slice(
+      credit_card.length - 5
+    );
+
+    const franchise = creditCardType(credit_card)[0];
+
+    const creditCardHash = await this.hashProvider.hash(credit_card);
+
+    const contact = await this.contactsRepository.create({
+      address,
+      credit_card: creditCardHash,
+      credit_card_last_four_digits,
+      email,
+      franchise: franchise.type,
+      name,
+      owner_id,
+      telephone,
+      date_of_birth: patterns.date["%Y%m%d"].test(date_of_birth)
+        ? new Date(
+            `${date_of_birth.slice(0, 4)}-${date_of_birth.slice(
+              4,
+              6
+            )}-${date_of_birth.slice(6, 8)}`
+          )
+        : new Date(date_of_birth),
+    });
+
+    return contact;
   }
 }
