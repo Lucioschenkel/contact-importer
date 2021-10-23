@@ -1,5 +1,10 @@
+import "reflect-metadata";
 import "dotenv/config";
 
+import "@shared/container";
 import queue from "@shared/infra/queue";
+import createConnection from "@shared/infra/typeorm/index";
 
-queue.process();
+createConnection().then(() => {
+  queue.process();
+});

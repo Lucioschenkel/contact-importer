@@ -12,7 +12,7 @@ const queues = Object.values(jobs).map((job) => ({
 interface IQueue {
   bull: Queue.Queue;
   name: string;
-  handle: (data: never) => never;
+  handle: (data: unknown) => unknown;
 }
 
 export default {

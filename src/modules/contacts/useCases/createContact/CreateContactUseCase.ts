@@ -59,7 +59,7 @@ export class CreateContactUseCase {
     }
 
     const credit_card_last_four_digits = credit_card.slice(
-      credit_card.length - 5
+      credit_card.length - 4
     );
 
     const franchise = creditCardType(credit_card)[0];

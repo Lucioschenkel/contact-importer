@@ -1,4 +1,7 @@
+/* eslint-disable import/no-duplicates */
 import { Exclude, Expose } from "class-transformer";
+import format from "date-fns/format";
+import enUS from "date-fns/locale/en-US";
 import { Column, Entity, OneToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
@@ -13,6 +16,7 @@ export class Contact implements IContact {
   @Column()
   name: string;
 
+  @Exclude()
   @Column()
   date_of_birth: Date;
 
@@ -37,7 +41,15 @@ export class Contact implements IContact {
   @Column()
   owner_id: string;
 
+  @Column()
   email: string;
+
+  @Expose({ name: "birth_date" })
+  getBirthDate() {
+    return format(this.date_of_birth, "yyyy MMMM dd", {
+      locale: enUS,
+    });
+  }
 
   constructor() {
     if (!this.id) {
