@@ -7,4 +7,6 @@ export interface IContact {
   credit_card: string;
   credit_card_last_four_digits: string;
   franchise: string;
+  owner_id: string;
+  email: string;
 }

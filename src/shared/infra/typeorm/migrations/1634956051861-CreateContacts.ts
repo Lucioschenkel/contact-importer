@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateContacts1634935053271 implements MigrationInterface {
+export class CreateContacts1634956051861 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -38,6 +38,20 @@ export class CreateContacts1634935053271 implements MigrationInterface {
           {
             name: "franchise",
             type: "varchar",
+          },
+          {
+            name: "owner_id",
+            type: "uuid",
+          },
+        ],
+        foreignKeys: [
+          {
+            name: "FKOwnerId",
+            columnNames: ["owner_id"],
+            referencedTableName: "users",
+            referencedColumnNames: ["id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
           },
         ],
       })
