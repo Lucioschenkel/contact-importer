@@ -1,4 +1,5 @@
 import { sign } from "jsonwebtoken";
+import { inject, injectable } from "tsyringe";
 
 import jwt from "@config/jwt";
 import { IUsersRepository } from "@modules/users/domain/repositories/IUsersRepository";
@@ -10,9 +11,12 @@ interface IRequest {
   password: string;
 }
 
+@injectable()
 export class AuthenticateUserUseCase {
   constructor(
+    @inject("UsersRepository")
     private usersRepository: IUsersRepository,
+    @inject("HashProvider")
     private hashProvider: IHashProvider
   ) {}
 

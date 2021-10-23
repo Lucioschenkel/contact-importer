@@ -5,4 +5,6 @@ export interface IContact {
   telephone: string;
   address: string;
   credit_card: string;
+  credit_card_last_four_digits: string;
+  franchise: string;
 }

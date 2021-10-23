@@ -31,6 +31,14 @@ export class CreateContacts1634935053271 implements MigrationInterface {
             name: "credit_card",
             type: "varchar",
           },
+          {
+            name: "credit_card_last_four_digits",
+            type: "varchar",
+          },
+          {
+            name: "franchise",
+            type: "varchar",
+          },
         ],
       })
     );

@@ -23,6 +23,12 @@ export class Contact implements IContact {
   @Column()
   credit_card: string;
 
+  @Column()
+  credit_card_last_four_digits: string;
+
+  @Column()
+  franchise: string;
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();

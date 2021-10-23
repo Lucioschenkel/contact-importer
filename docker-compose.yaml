@@ -13,6 +13,12 @@ services:
       - POSTGRES_DB=contact_importer
     volumes:
       - pgdata:/data/postgres
+  redis:
+    image: redis:alpine
+    container_name: redis_queue
+    restart: always
+    ports:
+      - "6379:6379"
   app:
     build: .
     container_name: contact_server
@@ -24,9 +30,7 @@ services:
       - database
     depends_on:
       - database
-    environment:
-      - PORT=3000
-      - TOKEN_SECRET=koombea
+      - redis
 
 volumes:
   pgdata:

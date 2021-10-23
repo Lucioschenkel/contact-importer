@@ -1,5 +1,6 @@
 import "reflect-metadata";
 
+import "dotenv/config";
 import createConnection from "@shared/infra/typeorm/index";
 
 import "./shared/container";
