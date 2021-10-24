@@ -22,7 +22,6 @@ export class CreateUserUseCase {
     const userExists = await this.usersRepository.findByUserName(username);
 
     if (userExists) {
-      // TODO add errors in a centralized file
       throw new AppError("The provided username is already taken");
     }
 

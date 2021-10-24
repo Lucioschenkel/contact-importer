@@ -18,13 +18,13 @@ export default function checkAuth(
   const { authorization } = request.headers;
 
   if (!authorization) {
-    throw new AppError("Authorization header missing");
+    throw new AppError("Authorization header missing", 401);
   }
 
   const [, token] = authorization.split(" ");
 
   if (!token) {
-    throw new AppError("Token missing");
+    throw new AppError("Token missing", 401);
   }
 
   try {
@@ -37,6 +37,6 @@ export default function checkAuth(
 
     return next();
   } catch {
-    throw new AppError("Invalid JWT Token");
+    throw new AppError("Invalid JWT Token", 401);
   }
 }

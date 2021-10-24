@@ -86,7 +86,6 @@ export default {
       return;
     }
 
-    // TODO upload file to azure blob
     let downloadUrl = "";
     try {
       const blobServiceClient = BlobServiceClient.fromConnectionString(

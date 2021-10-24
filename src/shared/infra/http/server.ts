@@ -1,15 +1,20 @@
 import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
+import swaggerUi from "swagger-ui-express";
 import { pagination } from "typeorm-pagination";
 
+import rateLimiter from "@middlewares/rateLimiter";
 import { AppError } from "@shared/errors/AppError";
 
+import swaggerFile from "../../../swagger.json";
 import routes from "./routes";
 
 export const app = express();
 
 app.use(express.json());
+app.use(rateLimiter);
 app.use(pagination);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(routes);
 
 app.use(

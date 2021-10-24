@@ -1,0 +1,338 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2021-10-24T14:52:17.886Z",
+  "__export_source": "insomnia.desktop.app:v2021.5.3",
+  "resources": [
+    {
+      "_id": "req_ac5a68683f4d465ea24e2f481e91541e",
+      "parentId": "fld_4123e40d328147d5a8d6c4a943430a55",
+      "modified": 1635087058069,
+      "created": 1635082378837,
+      "url": "{{ _.baseURL }}/failures",
+      "name": "List",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzUwODcwNTEsImV4cCI6MTYzNTA4Nzk1MSwic3ViIjoiYTA4OTJjZTQtYWE2Zi00ODk5LWE0NzItMjcwZTgyYTczODIxIn0.2PjqP3uAv1OQXNZtieFZYrzq0DNMkw7IsfKp5EugMLU"
+      },
+      "metaSortKey": -1635082378837,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_4123e40d328147d5a8d6c4a943430a55",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1635082373370,
+      "created": 1635082373370,
+      "name": "failures",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1635082373370,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "parentId": null,
+      "modified": 1634944164815,
+      "created": 1634944164815,
+      "name": "koombea test",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_e7cebab3aace42ea9e9217f53202ccde",
+      "parentId": "fld_fee64ddddfab47598a943cdcece7d128",
+      "modified": 1635043645848,
+      "created": 1635043626182,
+      "url": "{{ _.baseURL }}/imports",
+      "name": "List",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzUwNDM2NDAsImV4cCI6MTYzNTA0NDU0MCwic3ViIjoiYTA4OTJjZTQtYWE2Zi00ODk5LWE0NzItMjcwZTgyYTczODIxIn0.TnI_kEpZR46A8WnlvFXhUiS782qE87yvZkVs-0GT3DM"
+      },
+      "metaSortKey": -1635043626219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_fee64ddddfab47598a943cdcece7d128",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1635043620375,
+      "created": 1635043620375,
+      "name": "imports",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1635043620375,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_48b616e67b0f410a83985942f23587c9",
+      "parentId": "fld_e6b49c87530447d9a2e60169da8633a8",
+      "modified": 1635039271221,
+      "created": 1635038805744,
+      "url": "{{ _.baseURL }}/contacts?page=1",
+      "name": "List",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzUwMzg4MjgsImV4cCI6MTYzNTAzOTcyOCwic3ViIjoiYTA4OTJjZTQtYWE2Zi00ODk5LWE0NzItMjcwZTgyYTczODIxIn0.f0Idzp39bWM7c-kApNMHMAiq88jfhowne5WUqDyTI28"
+      },
+      "metaSortKey": -1635038805744,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_e6b49c87530447d9a2e60169da8633a8",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1635009743515,
+      "created": 1635009743515,
+      "name": "contacts",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1635009743515,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_b1e372dac62942999ee3045a1c7b4bf8",
+      "parentId": "fld_e6b49c87530447d9a2e60169da8633a8",
+      "modified": 1635082753846,
+      "created": 1635009753628,
+      "url": "{{ _.baseURL }}/contacts/import",
+      "name": "Import",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          {
+            "id": "pair_b22b5e4f58994b1cbeb1328249762d58",
+            "name": "spreadsheet",
+            "value": "",
+            "description": "",
+            "type": "file",
+            "fileName": "C:\\Users\\Lucio\\Desktop\\test1.csv"
+          },
+          {
+            "id": "pair_34c643694c13403a94fd4a8812945781",
+            "name": "name_column",
+            "value": "Name",
+            "description": ""
+          },
+          {
+            "id": "pair_2b35f72c51e64a09ae6a7a794486fb11",
+            "name": "email_column",
+            "value": "Email",
+            "description": ""
+          },
+          {
+            "id": "pair_62f822132078424d95380e28b886cb7f",
+            "name": "phone_column",
+            "value": "Phone",
+            "description": ""
+          },
+          {
+            "id": "pair_e99b75033ac246caa20267c007a25943",
+            "name": "date_of_birth_column",
+            "value": "Birthday",
+            "description": ""
+          },
+          {
+            "id": "pair_d654f0e8fb0744d9bdb5776b744948b0",
+            "name": "address_column",
+            "value": "Address",
+            "description": ""
+          },
+          {
+            "id": "pair_444a640744aa4f63b6ae00771f91a451",
+            "name": "credit_card_column",
+            "value": "CreditCard",
+            "description": ""
+          }
+        ]
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "multipart/form-data",
+          "id": "pair_41d3bc084a5149d6a6fe97790296fef3"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzUwODIzODYsImV4cCI6MTYzNTA4MzI4Niwic3ViIjoiYTA4OTJjZTQtYWE2Zi00ODk5LWE0NzItMjcwZTgyYTczODIxIn0.jLvAKjgqamm3z6Vq_AFX04bOi6kuXhRg0IIcMq6VJ9Y"
+      },
+      "metaSortKey": -1635009753628,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a89b53472fa241c3b8d01ca7df158506",
+      "parentId": "fld_23ecf46ecd6949eda8a97274b216eac7",
+      "modified": 1634945610759,
+      "created": 1634945472949,
+      "url": "{{ _.baseURL }}/authenticate",
+      "name": "Create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"username\": \"contato@lucioschenkel.com\",\n\t\"password\": \"invalida\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_84941bab83274e558b882e42d32479fb"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1634945472949,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_23ecf46ecd6949eda8a97274b216eac7",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1634945463236,
+      "created": 1634945463236,
+      "name": "authenticate",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1634945463236,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_c393b503da1847a2a824f4646b672db6",
+      "parentId": "fld_6953b94c1be5447abe018b417d1789f0",
+      "modified": 1634944738899,
+      "created": 1634944197548,
+      "url": "{{ _.baseURL }}/users",
+      "name": "Create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"username\": \"contato@lucioschenkel.com\",\n\t\"password\": \"invalida\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_84e7b58140644ae08a2a38884d7dcf29"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1634944197548,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_6953b94c1be5447abe018b417d1789f0",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1634944188962,
+      "created": 1634944188962,
+      "name": "users",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1634944188962,
+      "_type": "request_group"
+    },
+    {
+      "_id": "env_c6539a7d829afb90a3c86a8e3646bc8794947cbe",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1635087041194,
+      "created": 1634944164828,
+      "name": "Base Environment",
+      "data": {
+        "baseURL": "http://localhost:3000/api"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseURL"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1634944164828,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_c6539a7d829afb90a3c86a8e3646bc8794947cbe",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1634944164830,
+      "created": 1634944164830,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_9aa75bcaf1b245b59a90965d5c671268",
+      "parentId": "wrk_c926145cb0c1488f9233ecfa0b940ace",
+      "modified": 1634944164818,
+      "created": 1634944164818,
+      "fileName": "koombea test",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}

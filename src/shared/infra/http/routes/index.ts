@@ -8,10 +8,10 @@ import usersRoutes from "@modules/users/infra/http/routes/users.routes";
 
 const routes = Router();
 
-routes.use("/users", usersRoutes);
-routes.use("/authenticate", authRoutes);
-routes.use("/contacts", contactsRoutes);
-routes.use("/imports", importsRoutes);
-routes.use("/failures", failuresRoutes);
+routes.use("/api/users", usersRoutes);
+routes.use("/api/authenticate", authRoutes);
+routes.use("/api/contacts", contactsRoutes);
+routes.use("/api/imports", importsRoutes);
+routes.use("/api/failures", failuresRoutes);
 
 export default routes;

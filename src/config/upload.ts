@@ -2,8 +2,6 @@ import crypto from "crypto";
 import multer, { StorageEngine } from "multer";
 import path from "path";
 
-import { AppError } from "@shared/errors/AppError";
-
 const uploadFolder = path.resolve(__dirname, "../../", "uploads");
 const tmpFolder = path.resolve(__dirname, "..", "..", "tmp");
 
@@ -29,7 +27,7 @@ export default {
         if (file.mimetype === "text/csv") {
           callback(null, filename);
         } else {
-          callback(new AppError("Invalid file format"), null);
+          callback(new Error("Invalid file format"), null);
         }
       },
     }),
