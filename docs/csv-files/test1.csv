@@ -1,0 +1,7 @@
+Name,Email,Phone,Birthday,Address,CreditCard
+Lucio Schenkel,contato@lucioschenkel.com,(+00) 000 000 00 00 00,1996-03-31,Nice address,4444444444444444
+John Doe,john@doe.com,(+00) 000 000 00 00 0,1996-02-28,Nice Address,4444444444444444
+$Invalid,valid@example.com,(+00) 000 000 00 00 00,2000-05-10,Nice address,4444444444444444
+Valid-name,valid@example.com,(+00) 000 000 00 00 00,2000-06,Nice Address,4444444444444444
+Valid name,valid@example.com,(+00) 000 000 00 00 00,2001-03-01,,4444444444444444
+Valid name,valid@example.com,(+00) 000 000 00 00 00,1985-03-31,Nice Address,44446
