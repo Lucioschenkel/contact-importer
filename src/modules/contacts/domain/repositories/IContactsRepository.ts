@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IContact } from "../entities/IContact";
 
 export interface ICreateContactDTO {
@@ -15,4 +16,5 @@ export interface ICreateContactDTO {
 export interface IContactsRepository {
   findByEmail(email: string, owner_id: string): Promise<IContact>;
   create(data: ICreateContactDTO): Promise<IContact>;
+  createQueryBuilder(): any;
 }

@@ -5,13 +5,17 @@ import multer from "multer";
 import uploadConfig from "@config/upload";
 import checkAuth from "@middlewares/checkAuth";
 
+import { ContactsController } from "../controllers/ContactsController";
 import { ImportContactsController } from "../controllers/ImportContactsController";
 
 const contactsRoutes = Router();
 
 const importContactsController = new ImportContactsController();
+const contactsController = new ContactsController();
 
 const upload = multer(uploadConfig.multer);
+
+contactsRoutes.get("/", checkAuth, contactsController.create);
 
 contactsRoutes.post(
   "/import",

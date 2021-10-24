@@ -63,10 +63,14 @@ export default {
         await createContactUseCase.execute(formattedData);
         nImports += 1;
       } catch (err) {
+        delete formattedData.credit_card;
+
         await createFailureUseCase.execute({
           import_id,
           owner_id: user_id,
-          provided_data: formattedData,
+          provided_data: {
+            ...formattedData,
+          },
           reason: err.message,
         });
       }

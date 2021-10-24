@@ -1,4 +1,4 @@
-import { getRepository, Repository } from "typeorm";
+import { getRepository, Repository, SelectQueryBuilder } from "typeorm";
 
 import { IContact } from "@modules/contacts/domain/entities/IContact";
 import {
@@ -52,5 +52,9 @@ export class ContactsRepository implements IContactsRepository {
     });
 
     return contact;
+  }
+
+  createQueryBuilder(): SelectQueryBuilder<Contact> {
+    return this.repository.createQueryBuilder();
   }
 }
