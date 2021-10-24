@@ -19,6 +19,8 @@ export class UpdateImportUseCase {
   async execute({ status, import_id, download_url }: IRequest): Promise<void> {
     const imp = await this.importsRepository.findById(import_id);
 
+    console.log(import_id);
+
     if (!imp) {
       throw new AppError("Import not found", 404);
     }
@@ -30,5 +32,7 @@ export class UpdateImportUseCase {
     }
 
     await this.importsRepository.update(imp);
+
+    console.log(`After update: ${imp.id}`);
   }
 }

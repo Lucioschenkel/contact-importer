@@ -144,6 +144,6 @@ export default function contactValidator({
       throw err;
     }
 
-    throw new AppError("Validation failed");
+    throw new AppError(`Validation failed ${err.message}`);
   }
 }
