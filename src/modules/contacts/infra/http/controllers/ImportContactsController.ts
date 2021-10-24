@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { ImportContactsUseCase } from "@modules/contacts/useCases/importContactsUseCase/ImportContactsUseCase";
+import { CreateImportUseCase } from "@modules/contacts/useCases/createImport/CreateImportUseCase";
+import queue from "@shared/infra/queue";
 
 export class ImportContactsController {
-  create(request: Request, response: Response): Response {
+  async create(request: Request, response: Response): Promise<Response> {
     const {
       name_column,
       email_column,
@@ -12,20 +14,27 @@ export class ImportContactsController {
       address_column,
       credit_card_column,
     } = request.body;
+    const { file, user } = request;
 
-    const importContactsUseCase = new ImportContactsUseCase();
+    const createImportUseCase = container.resolve(CreateImportUseCase);
 
-    importContactsUseCase.execute({
-      file: request.file,
+    const imp = await createImportUseCase.execute({
+      file_name: file.originalname,
+      owner_id: user.id,
+    });
+
+    queue.add("ContactSheetProcessing", {
+      file: file.path,
       columns_names: {
+        name: name_column,
+        email: email_column,
+        phone: phone_column,
+        date_of_birth: date_of_birth_column,
         address: address_column,
         credit_card: credit_card_column,
-        date_of_birth: date_of_birth_column,
-        phone: phone_column,
-        email: email_column,
-        name: name_column,
       },
-      user_id: request.user.id,
+      user_id: user.id,
+      import_id: imp.id,
     });
 
     return response

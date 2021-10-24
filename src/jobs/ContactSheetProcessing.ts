@@ -78,8 +78,6 @@ export default {
 
     const status = nImports === 0 ? "FAILED" : "FINISHED";
 
-    console.log(status, nImports);
-
     if (empty) {
       await deleteImportUseCase.execute({ import_id });
       return;
