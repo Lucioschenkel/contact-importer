@@ -1,11 +1,17 @@
-import { CreateContactUseCase } from "@modules/contacts/useCases/createContact/CreateContactUseCase";
+/* eslint-disable no-restricted-syntax */
 import csvParse from "csv-parse";
 import fs from "fs";
 import { container } from "tsyringe";
 
+import { CreateContactUseCase } from "@modules/contacts/useCases/createContact/CreateContactUseCase";
+import { CreateFailureUseCase } from "@modules/contacts/useCases/createFailure/CreateFailureUseCase";
+import { DeleteImportUseCase } from "@modules/contacts/useCases/deleteImport/DeleteImportUseCase";
+import { UpdateImportUseCase } from "@modules/contacts/useCases/updateImportStatus/UpdateImportUseCase";
+
 interface IData {
   file: string;
   user_id: string;
+  import_id: string;
   columns_names: {
     name: string;
     email: string;
@@ -19,9 +25,19 @@ interface IData {
 export default {
   key: "ContactSheetProcessing",
   async handle({ data }) {
-    const { file, columns_names, user_id } = data as IData;
+    const { file, columns_names, user_id, import_id } = data as IData;
+    let nImports = 0;
+    let empty = true;
 
+    const updateImportUseCase = container.resolve(UpdateImportUseCase);
     const createContactUseCase = container.resolve(CreateContactUseCase);
+    const createFailureUseCase = container.resolve(CreateFailureUseCase);
+    const deleteImportUseCase = container.resolve(DeleteImportUseCase);
+
+    await updateImportUseCase.execute({
+      import_id,
+      status: "PROCESSING",
+    });
 
     const stream = fs.createReadStream(file);
     const parseFile = csvParse({
@@ -30,27 +46,48 @@ export default {
 
     stream.pipe(parseFile);
 
-    parseFile
-      .on("data", async (data) => {
-        try {
-          await createContactUseCase.execute({
-            address: data[columns_names.address],
-            credit_card: data[columns_names.credit_card],
-            date_of_birth: data[columns_names.date_of_birth],
-            email: data[columns_names.email],
-            name: data[columns_names.name],
-            owner_id: user_id,
-            telephone: data[columns_names.phone],
-          });
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .on("end", () => {
-        fs.promises.unlink(file);
-      })
-      .on("error", (err) => {
-        throw err;
-      });
+    for await (const data of parseFile) {
+      empty = false;
+
+      const formattedData = {
+        address: data[columns_names.address],
+        credit_card: data[columns_names.credit_card],
+        date_of_birth: data[columns_names.date_of_birth],
+        email: data[columns_names.email],
+        name: data[columns_names.name],
+        owner_id: user_id,
+        telephone: data[columns_names.phone],
+      };
+
+      try {
+        await createContactUseCase.execute(formattedData);
+        nImports += 1;
+      } catch (err) {
+        await createFailureUseCase.execute({
+          import_id,
+          owner_id: user_id,
+          provided_data: formattedData,
+          reason: err.message,
+        });
+      }
+    }
+
+    const status = nImports === 0 ? "FAILED" : "FINISHED";
+
+    console.log(status, nImports);
+
+    if (empty) {
+      await deleteImportUseCase.execute({ import_id });
+      return;
+    }
+
+    // TODO upload file to azure blob
+
+    await updateImportUseCase.execute({
+      import_id,
+      status,
+    });
+
+    await fs.promises.unlink(file);
   },
 };

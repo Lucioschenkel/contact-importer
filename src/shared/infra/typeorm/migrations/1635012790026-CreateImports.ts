@@ -23,6 +23,7 @@ export class CreateImports1635012790026 implements MigrationInterface {
           {
             name: "download_url",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "created_at",
